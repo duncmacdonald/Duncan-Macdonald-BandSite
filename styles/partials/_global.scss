@@ -1,0 +1,160 @@
+$Bandsite-Black: #323232;
+$Mercury: #E1E1E1;
+$Alabaster: FAFAFA;
+$Silver: #AFAFAF;
+$White: #FFF;
+
+
+@font-face {
+    font-family: 'AvenirNext';
+    src: url("../assets/fonts/AvenirNextLTPro-Regular.otf");
+    src: url("../assets/fonts/alternative_files/AvenirNextLTPro.ttf") format("truetype");
+    font-weight: 400;
+}
+
+@font-face{
+    font-family: 'AvenirNext';
+    src: url("../assets/fonts/AvenirNextLTPro-Bold.otf") format("opentype");
+    src: url("../assets/fonts/alternative_files/AvenirNextLTProBold.ttf") format("truetype");
+    font-weight: 700;
+}
+
+@font-face{
+    font-family: 'AvenirNext';
+    src: url("../assets/fonts/AvenirNextLTPro-Demi") format("opentype");
+    src: url("../assets/fonts/alternative_files/AvenirNextLTProDemi.ttf") format("truetype");
+    font-weight: 600;
+}
+
+
+*{
+    margin: 0;
+    font-family: AvenirNext;
+}
+
+h1 {
+    text-transform: uppercase;
+    font-size: 1.25rem;
+    font-weight: 400;
+    width: 7.5rem;
+    padding: 0;
+    color: $White;
+    background-color: $Bandsite-Black;
+
+}
+
+h2 {
+    font-weight: 600;
+    font-size: 1.25rem;
+    line-height: 1.25rem;
+    padding: 1.5rem 0 1rem;
+}
+
+h3 {
+    font-size: .875rem;
+    line-height: 1.375rem; 
+    font-weight: 600;
+    padding-bottom: 1rem;
+}
+
+a {
+    text-decoration: none;
+    color:$White;
+}
+
+p {
+  font-size: 13px;
+  line-height: 18px;  
+}
+
+
+
+header {
+    background-color: $Bandsite-Black;
+    padding-top: 1rem;
+    position: relative;
+
+    h1 {
+        position: relative;
+        text-align: center;
+        left: 50%;
+        transform: translateX(-50%);
+        
+    }
+}
+
+.site-nav {
+    display: flex;
+    padding: 0;
+
+    li {
+        list-style: none;
+        flex: 50%;
+        text-align: center;
+
+
+        a {
+            color: $Mercury;
+            border-bottom: $Bandsite-Black solid 4px;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            width: 100%;
+            display: block;
+            
+        
+            &:hover {
+                color: $White;
+                border-bottom: white solid 4px;
+                padding-top: 1rem;
+                padding-bottom: 1rem;
+            }
+
+            &:active {
+                color: $White;
+                font-weight: 700;
+                border-bottom: white solid 4px;
+                padding-top: 1rem;
+                padding-bottom: 1rem;
+            }
+        }
+    }
+}
+
+
+footer {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    background-color: $Bandsite-Black;
+    color: $White;
+    font-size: 0.8125rem;
+    line-height: 1.125rem;
+
+    h1 {
+        margin-bottom: 1.5rem;
+    }
+}
+
+.social-links {
+    display: flex;
+    justify-content: left;
+    gap: 2rem;
+}
+
+.contacts {
+    margin-bottom: 4rem;
+
+    &__contact {
+        margin-top: 1.5rem;
+
+        h4 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            line-height: 1.375rem;
+        }
+
+        div {
+            margin: 1rem 0;
+        }
+    }
+    
+}
