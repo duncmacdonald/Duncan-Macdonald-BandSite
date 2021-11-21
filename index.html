@@ -5,38 +5,44 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./styles/bio.css" />
-    <title>Document</title>
+    <title>The Bees Knees</title>
   </head>
-  <body>
 
-    
+
+  <body>
+    <!-- Header title bar-->
     <header>
       <a href=./index.html><h1>Bandsite</h1></a>
       <nav>
         <ul class="site-nav">
-          <li><a href="./index.html">Biography</a></li>
+          <li><a id="site-nav__current" href="./index.html">Biography</a></li>
           <li><a href="https://google.com">Shows</a></li>
         </ul>
       </nav>
     </header>
+    <!-- End of Header-->
   
+    <!-- Honeybee section -->
     <section class="hero">
-      <h2 class>The Bees Knees</h1>
+      <h2>The Bees Knees</h1>
     </section>
+    <!-- End of Honeybee section -->
 
+    <!-- About section -->
     <section class="about">
       <h2>About the Musicians</h2>
       <img src="./assets/images/band.jpg" alt="The Bees Knees on stage" />
 
+      <!-- Under image special formatted text -->
       <blockquote>“We push each other to be the best. It’s not uncommon for one of us to
         say ‘this needs to be better, back to the drawing board’”</blockquote>
-      
       <p class="about__quote-attribution">
         - Bryan Teddy, lead vocalist of The Bees Knees
       </p>
       
 
       <h3>The Bees Knees</h3>
+      <!-- Flexbox container for the paragraphs -->
       <section class="about__content">
         <p>
           The Bees Knees is a pop rock band originating from San Francisco,
@@ -58,11 +64,15 @@
           forward to touring in the future, The Bees Knees are currently recording
           their second studio album, looking to be released in late 2021.
         </p>
+      </section>
+      <!-- End of flexbox container -->
     </section>
-    </section>
+    <!-- End of About Section -->
 
+    <!-- Photo Gallery section-->
     <section class="photo-gallery">
       <h2>Photo Gallery</h2>
+      <!-- Flexbox container for images -->
       <div class="photo-gallery__photos">
         <img src="./assets/images/Photo-gallery-1.jpg" alt="smokey lasers at concert">
         <img src="./assets/images/Photo-gallery-2.jpg" alt="girl dancing at concert">
@@ -75,18 +85,30 @@
         <img src="./assets/images/Photo-gallery-9.jpg" alt="confetti on crowd">
       </div>
     </section>
+    <!-- End of Photo Gallery -->
+
 
     <footer>
+      <!-- Flex container used in tablet+ screen sizes-->
       <div class="footer-top">
         <h2>Get in Touch</h2>
+        <!-- Flex container for social links -->
         <section class="footer-top__social-links">
           <a href="https://instagram.com"><img src="./assets/icons/Icon-instagram.svg" alt="instagram"></a>
           <a href="https://facebook.com"><img src="./assets/icons/Icon-facebook.svg" alt="facebook"></a>
           <a href="https://twitter.com"><img src="./assets/icons/Icon-twitter.svg" alt="twitter"></a>
         </section>
+        <!-- End of social links-->
+
+        <!-- This is hidden by css on mobile screens -->
         <a class="footer-top__tablet-title" href=./index.html><h1>Bandsite</h1></a>
       </div>
+      <!-- End of "footer-top"-->
+
+      <!-- Flex container for contact information-->
       <section class="contacts">
+        
+        <!-- contact card -->
         <div class="contacts__contact">
           <h4>Cam Adams</h3>
           <h4>The Bees Knees Management</h3>
@@ -97,6 +119,7 @@
           <a href="mailto:info@thebeesknees.com">info@thebeesknees.com</a>
         </div>
 
+        <!-- contact card -->
         <div class="contacts__contact">
           <h4>Pearl Gregg</h3>
           <h4>Limitless Artist Group</h3>
@@ -107,6 +130,7 @@
           <a href="mailto:pearl.gregg@limitlessag.com">pearl.gregg@limitlessag.com</a>
         </div>
 
+        <!-- contact card -->
         <div class="contacts__contact">
           <h4>Carson Whyte</h3>
           <h4>ARCH Entertainment</h3>
@@ -117,8 +141,11 @@
           <a href="mailto:cwhyte@archentertainment.com">cwhyte@archentertainment.com</a>
         </div>
       </section>
+      <!-- End of contact card -->
 
+      <!-- CSS makes this only visible on phones sizes screens -->
       <a class="footer__mobile-title" href="./index.html"><h1 >Bandsite</h1></a>
+      
       <p class="copyright">Copyright The Bees Knees © 2021 All Rights Reserved</p>
     </footer>
   </body>

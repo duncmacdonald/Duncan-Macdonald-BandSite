@@ -1,5 +1,6 @@
-@import "./partials/_global.scss";
+@import "./partials/_global.scss"; //styleguide fonts, breakpoints, header, and footer
 
+//Honeybee section
 .hero {
     background: linear-gradient(rgba($Bandsite-Black,0.5), rgba($Bandsite-Black,0.5)), url("../assets/images/hero-bio.jpg");
     height: 58vw;
@@ -8,22 +9,24 @@
     background-position-y: 20%;
     position: relative;
 
+    //"The Bees Knees"
     h2 {
-        position: relative;
-        top: 50%;
-        transform: translateY(-50%);
+        //override h2 color and weight
         font-weight: 600;
         color: $White;
-        margin-left: 1rem;
+        padding-left: 1rem;
+        //vertically center
+        position: relative;
+        top: 50%; 
+        transform: translateY(-50%);
 
         @include tablet {
             font-size: 3.75rem;
             line-height: 4.25rem;
-            padding-left: 2rem;
+            padding-left: 3rem;
         }
 
-        @include desktop(2);
-    
+        @include desktop(3);
     }
 }
 
@@ -42,7 +45,7 @@
         }
     }
 
-    @include desktop(6);
+    @include desktop(6); //this content has 6rem padding in tablet breakpoint
 
     img {
         width: 100%;
@@ -78,6 +81,7 @@
         padding-bottom: 2rem;       
     }
 
+    //long text section
     &__content{
 
         @include tablet {
@@ -104,28 +108,33 @@
         padding-right: 3rem;   
     }
 
-    @include desktop;
+    @include desktop(3);
 
-
-
+    
     &__photos {
         display: flex;
-        flex-direction: column;
+        flex-direction: column; //flex container 1x9 mobile
 
         @include tablet {
-            flex-direction: row;
+            flex-direction: row; //flex container 3 x 3 mobile
             flex-wrap: wrap;
             justify-content: space-between;
-            //width: calc(100% - 12rem);
         }
         
         img {
           margin-bottom: 1rem;
+          filter: grayscale(1); //full grayscale
+          transition: 0.5s;
 
           @include tablet {
-              width: 31%;
-              margin-bottom: 1.5rem;
-          }
+              width: 31%; //3 to a row
+              margin-bottom: 1.5rem;    
+            } 
+        
+            &:hover {
+                filter: grayscale(0); //remove grayscale on hover
+                filter: drop-shadow(8px 8px 10px $Bandsite-Black);
+            }
         }
     }
 }
