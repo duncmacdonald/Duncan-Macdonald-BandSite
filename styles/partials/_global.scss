@@ -1,10 +1,28 @@
+//Colors
+
 $Bandsite-Black: #323232;
 $Mercury: #E1E1E1;
-$Alabaster: FAFAFA;
+$Alabaster: #FAFAFA;
 $Silver: #AFAFAF;
 $White: #FFF;
 
+//Breakpoints
+@mixin tablet {
+    @media (min-width: 768px) {
+        @content;
+    }
+}
 
+//1058px is the screen width where tablet css produces the correct desktop result. Time to stop the page content from growing.
+@mixin desktop($tabletPadding : 3) {
+    @media (min-width: 1058px) {
+        padding-left: calc((100% - 1058px) / 2 + #{$tabletPadding}rem);
+        padding-right: calc((100% - 1058px) / 2 + #{$tabletPadding}rem);
+    }
+}
+
+
+//Fonts
 @font-face {
     font-family: 'AvenirNext';
     src: url("../assets/fonts/AvenirNextLTPro-Regular.otf");
@@ -41,20 +59,35 @@ h1 {
     color: $White;
     background-color: $Bandsite-Black;
 
+    @include tablet {
+        font-size: 1.5rem;
+        //font-weight: 400;
+    }
+
 }
 
 h2 {
     font-weight: 600;
-    font-size: 1.25rem;
-    line-height: 1.25rem;
-    padding: 1.5rem 0 1rem;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    padding: 2rem 0 1rem;
+
+    @include tablet {
+        font-size: 2rem;
+        line-height: 2.5rem;
+    }
 }
 
 h3 {
     font-size: .875rem;
-    line-height: 1.375rem; 
+    line-height: 1rem; 
     font-weight: 600;
-    padding-bottom: 1rem;
+
+    @include tablet {
+        font-size: 1.5rem;
+        line-height: 2rem;
+    }
+    
 }
 
 a {
@@ -63,8 +96,14 @@ a {
 }
 
 p {
-  font-size: 13px;
-  line-height: 18px;  
+  font-size: 0.8125rem;
+  line-height: 1.125rem;
+
+  @include tablet{
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+
+  }
 }
 
 
@@ -73,13 +112,29 @@ header {
     background-color: $Bandsite-Black;
     padding-top: 1rem;
     position: relative;
+    align-items: center;
+
+    @include tablet {
+        display: flex;
+        position: unset;
+        padding-left: 3rem;
+    }
+
+    @include desktop(3);
 
     h1 {
         position: relative;
         text-align: center;
         left: 50%;
         transform: translateX(-50%);
-        
+      
+        @include tablet {
+            //undo all the mobile positioning. This was the only place a mobile media query would have been used so I didn't make one.
+            position: unset;
+            text-align: left;
+            left: 0%;
+            transform: translateX(0);
+        }      
     }
 }
 
@@ -91,6 +146,10 @@ header {
         list-style: none;
         flex: 50%;
         text-align: center;
+        
+        @include tablet {
+            margin-left: 3rem;
+        }
 
 
         a {
@@ -128,20 +187,77 @@ footer {
     color: $White;
     font-size: 0.8125rem;
     line-height: 1.125rem;
+    padding-bottom: 1rem;
 
+    @include tablet {
+        //position: relative;
+        padding-left: 3rem;
+        padding-right: 3rem;
+        padding-bottom:3rem;
+    }
+
+    @include desktop(3);
+}
+
+.footer__mobile-title { 
+    
     h1 {
-        margin-bottom: 1.5rem;
+        padding-bottom: 1.5rem;
+    }
+
+    //hide the bottom title for non mobile screens
+    @include tablet {
+        display: none;
+    }
+
+}
+
+.footer-top {
+    @include tablet {
+        display: flex;
+        align-items: baseline;
+        padding-top: 3rem;
+        
+        
+        h2 {
+            padding: 0;
+        }
+    }
+
+
+    &__tablet-title {
+            
+        //hide while the mobile title is displayed
+        display: none;
+
+            //hide the bottom title for non mobile screens
+        @include tablet {
+            display: block;
+            margin-left: auto;    
+        }
+    }
+
+    &__social-links {
+        display: flex;
+        justify-content: left;
+        gap: 2rem;
+
+        @include tablet {
+            align-items: flex-end;
+            padding-bottom: 1.5rem;
+            margin-left: 3rem;
+        }
     }
 }
-
-.social-links {
-    display: flex;
-    justify-content: left;
-    gap: 2rem;
-}
-
 .contacts {
     margin-bottom: 4rem;
+
+    @include tablet {
+        display: flex;
+        justify-content: space-between;
+        width: 40rem;
+        margin-bottom: 3rem;
+    }
 
     &__contact {
         margin-top: 1.5rem;
@@ -157,4 +273,8 @@ footer {
         }
     }
     
+}
+
+.copyright{
+    font-size: 0.7rem;
 }

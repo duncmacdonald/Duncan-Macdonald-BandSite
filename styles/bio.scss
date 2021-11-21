@@ -1,19 +1,29 @@
 @import "./partials/_global.scss";
 
 .hero {
-    background: linear-gradient(rgba($Bandsite-Black,0.2), rgba(rgba($Bandsite-Black,0.8),0.2)), url("../assets/images/hero-bio.jpg");
-    height: 20rem;
+    background: linear-gradient(rgba($Bandsite-Black,0.5), rgba($Bandsite-Black,0.5)), url("../assets/images/hero-bio.jpg");
+    height: 58vw;
+    max-height: 40rem;
     background-size: cover;
-    background-position: center;
+    background-position-y: 20%;
     position: relative;
 
     h2 {
         position: relative;
         top: 50%;
         transform: translateY(-50%);
-        font-weight: 700;
+        font-weight: 600;
         color: $White;
         margin-left: 1rem;
+
+        @include tablet {
+            font-size: 3.75rem;
+            line-height: 4.25rem;
+            padding-left: 2rem;
+        }
+
+        @include desktop(2);
+    
     }
 }
 
@@ -21,18 +31,63 @@
     margin-left: 1rem;
     margin-right: 1rem;
 
+    //Set new width of section then align h2 with hero title 
+    @include tablet {
+        padding-left: 6rem;
+        padding-right: 6rem;
+        padding-bottom: 2rem;
+
+        h2 {
+            transform: translateX(-3rem);
+        }
+    }
+
+    @include desktop(6);
+
     img {
         width: 100%;
+        height: 50vw;
+        max-height: 27rem;
+        object-fit: cover;
+        object-position: bottom;
 
+        //set image height to match provided documentation at 786px 
+        @include tablet {
+            height: 42vw;
+        }
     }
 
     blockquote {
         font-size: .875rem;
-        line-height: 1.375rem; 
+        line-height: 1.5rem; 
         font-weight: 600;
-        padding-bottom: 1rem;
-        p {
-            padding-top: 0.5rem;       
+        padding: .35rem 0;
+        max-width: 42rem;
+
+        @include tablet{
+            font-size: 1.4em;
+            line-height: 1.75rem;
+        }
+    }
+    
+    &__quote-attribution {
+        font-size: .875rem;
+        line-height: 1.5rem; 
+        font-weight: 600;
+        padding-top: .35rem;
+        padding-bottom: 2rem;       
+    }
+
+    &__content{
+
+        @include tablet {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem; //prevents the paragraphs drom drifting apart as the page grows.
+        }
+
+        p{
+            padding: 0.5rem 0;
         }
     }
 }
@@ -40,15 +95,37 @@
 
 
 .photo-gallery {
-    margin-left: 1rem;
-    margin-right: 1rem;
+    background-color: $Alabaster;
+    padding-left: 1rem;
+    padding-right: 1rem;
+
+    @include tablet {
+        padding-left: 3rem;
+        padding-right: 3rem;   
+    }
+
+    @include desktop;
+
+
 
     &__photos {
         display: flex;
         flex-direction: column;
+
+        @include tablet {
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            //width: calc(100% - 12rem);
+        }
         
         img {
           margin-bottom: 1rem;
+
+          @include tablet {
+              width: 31%;
+              margin-bottom: 1.5rem;
+          }
         }
     }
 }
