@@ -140,8 +140,25 @@
 }
 
 .conversation {
+
     padding-left: 1rem;
     padding-right: 1rem;
+
+    @include tablet {
+        padding-left: 6rem;
+        padding-right: 6rem;
+
+        h2 {
+            position: relative;
+            left: -3rem;
+        }
+    }
+
+    //@include desktop {
+    //    max-width: 30rem;
+    //    margin-left: auto;
+    //    margin-right: auto;
+    //}
 
     &__top {
         display: flex;
@@ -149,11 +166,19 @@
         padding-bottom: 1rem;
         border-bottom: 1px $Mercury solid;
 
+       
+
         img{
             transform: translateY(1.25rem);
         }
 
         form {
+            width: 100%;
+
+            @include tablet {
+                position: relative;
+                padding-bottom: 2rem;
+            }
             label {
                 text-transform: uppercase;
                 font-size: 0.875rem;
@@ -161,7 +186,7 @@
                 margin-bottom: 0.25rem;
             }
 
-            input {
+            input, textarea {
                 box-sizing: border-box;
                 width: 100%;
                 min-height: 2rem;
@@ -173,11 +198,17 @@
                 font-size: 0.875rem;
                 line-height: 1rem;
                 color: $Bandsite-Black;
+                background-color: $Alabaster;
 
                 &:active, &:focus{
                     border: 1px solid $Error-Red;
                     //background-color: yellow;
                 }
+            }
+
+            textarea {
+                height: 6rem;
+                resize: none;
             }
 
             button {
@@ -189,6 +220,15 @@
                 border-radius: 0.25rem;
                 border: none;
                 text-transform: uppercase;
+                
+                
+
+                @include tablet {
+                    max-width: 8rem;
+                    position: absolute;
+                    right: 0;
+                    bottom: 0;
+                }
                 
                 //Match font from mockup
                 font-weight: 600;
@@ -204,18 +244,26 @@
 }
 
 #conversation__comments{
-    flex-direction: column-reverse;
+    flex-direction: column;
+    margin-bottom: 1rem;
+
+
 
     .card {
         padding: 1rem 0;
         border-bottom: 1px $Mercury solid;
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
 
-        //name and date
-        div {
-            display: flex;
-            justify-content: space-between;
+        &__right {
+           width: 100%;
 
+
+            //name and date
             div {
+                display: flex;
+                justify-content: space-between;
                 color: $Silver;
                 font-size: .875rem;
             }
@@ -231,7 +279,9 @@
 .avatar{
     height: 2rem;
     width: 2rem;
+    min-width: 2rem;
     object-fit: cover;
     border-radius: 50%;
     object-position: 10% 0;
+    background-color: $Mercury;
 }
