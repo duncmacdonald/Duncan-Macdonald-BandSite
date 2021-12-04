@@ -139,10 +139,99 @@
     }
 }
 
+.conversation {
+    padding-left: 1rem;
+    padding-right: 1rem;
+
+    &__top {
+        display: flex;
+        gap: 1rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px $Mercury solid;
+
+        img{
+            transform: translateY(1.25rem);
+        }
+
+        form {
+            label {
+                text-transform: uppercase;
+                font-size: 0.875rem;
+                color: $Silver;
+                margin-bottom: 0.25rem;
+            }
+
+            input {
+                box-sizing: border-box;
+                width: 100%;
+                min-height: 2rem;
+                padding: 1rem;
+                margin: 0;
+                margin-bottom: 1rem;
+                border: 1px solid $Mercury;
+                border-radius: .25rem;
+                font-size: 0.875rem;
+                line-height: 1rem;
+                color: $Bandsite-Black;
+
+                &:active, &:focus{
+                    border: 1px solid $Error-Red;
+                    //background-color: yellow;
+                }
+            }
+
+            button {
+                width: 100%;
+                min-width: 150px;
+                height: 2.5rem;
+                color: $White;
+                background-color: $Bandsite-Black;
+                border-radius: 0.25rem;
+                border: none;
+                text-transform: uppercase;
+                
+                //Match font from mockup
+                font-weight: 600;
+                font-size: 1rem;
+
+                &:hover {
+                    background-color: $BandSite-DarkBlack;
+                }
+
+            }
+        } //end of form
+    }// end of top
+}
+
+#conversation__comments{
+    flex-direction: column-reverse;
+
+    .card {
+        padding: 1rem 0;
+        border-bottom: 1px $Mercury solid;
+
+        //name and date
+        div {
+            display: flex;
+            justify-content: space-between;
+
+            div {
+                color: $Silver;
+                font-size: .875rem;
+            }
+        }
+
+        p{
+            padding-top: 1rem;
+        }
+
+    }
+}
+
 .avatar{
-    height: 50px;
-    width: 50px;
+    height: 2rem;
+    width: 2rem;
     object-fit: cover;
-    border-radius: 25px;
+    border-radius: 50%;
     object-position: 10% 0;
 }

@@ -15,61 +15,45 @@ window.onload = () => {
     {
       name: "Miles Acosta",
       comment: "I can't stop listening. Every time I hear one of their songs - the vocals - it gives me goosebumps. Shivers straight down my spine. What a beautiful expression of creativity. Can't get enough.",
-      timestamp: new Date(2020, 11, 20) //"2020-12-20"
-        ,
+      timestamp: new Date(2020, 11, 20),
     },
   ];
 
-  function renderComments() {
+  function displayComment(com){
     
-    //dom get name, comment, photo
-    //const aName =
-    //const aComment =
-    //const aPhoto =
-
-    const commentContainer = document.getElementById('comments');
-    commentContainer.querySelectorAll('div').forEach(i => i.remove());
-
-
-
-    for(let i=0; i<comments.length; i++)
-    {
-        //mockup has 2 digit date and month
-        let month = String(comments[i].timestamp.getMonth()+1);
-        if(month.length<2){
-            month = 0 + month;
-        }
-        let date = String(comments[i].timestamp.getDate());
-        if(date.length<2){
-            date = 0 + date;
-        }
-        const year = String(comments[i].timestamp.getFullYear());
-        
-        const card = document.createElement('div');
-        card.setAttribute("class", "card");
-        commentContainer.appendChild(card);
-
-        const topOfCard = document.createElement('div');
-        card.appendChild(topOfCard);
-
-        const name = document.createElement('h4');
-        name.innerText = comments[i].name;
-        topOfCard.appendChild(name);
-
-        const time = document.createElement('div');
-        time.innerText = month + "/" + date + "/" + year;
-        topOfCard.appendChild(time);
-
-        const comment = document.createElement('p');
-        comment.innerText = comments[i].comment;
-        card.appendChild(comment);
-
-
-
-        
+    //mockup has 2 digit date and month
+    let month = String(com.timestamp.getMonth()+1);
+    if(month.length<2){
+      month = 0 + month;
     }
+    let date = String(com.timestamp.getDate());
+    if(date.length<2){
+      date = 0 + date;
+    }
+    const year = String(com.timestamp.getFullYear());
     
-  }
+
+    const commentContainer = document.getElementById('conversation__comments');
+    const card = document.createElement('div');
+    card.setAttribute("class", "card");
+    commentContainer.appendChild(card);
+
+    const topOfCard = document.createElement('div');
+    card.appendChild(topOfCard);
+
+    const name = document.createElement('h4');
+    name.innerText = com.name;
+    topOfCard.appendChild(name);
+
+    const time = document.createElement('div');
+    time.innerText = month + "/" + date + "/" + year;
+    topOfCard.appendChild(time);
+
+    const message = document.createElement('p');
+    message.innerText = com.comment;
+    card.appendChild(message);
+  } 
+
 
   const form = document.getElementById("newComment");
   form.addEventListener("submit", (e) => {
@@ -80,10 +64,13 @@ window.onload = () => {
     //console.log(e.target.message.value);
     console.log(comments);
     
-    renderComments();
-
+    displayComment(comments[comments.length - 1]);
+    form.reset();
   });
 
 
-  renderComments();
+  for(let i=0; i<comments.length; i++)
+  {
+    displayComment(comments[i]);  
+  }
 };
