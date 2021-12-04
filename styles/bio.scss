@@ -139,3 +139,10 @@
     }
 }
 
+.avatar{
+    height: 50px;
+    width: 50px;
+    object-fit: cover;
+    border-radius: 25px;
+    object-position: 10% 0;
+}
