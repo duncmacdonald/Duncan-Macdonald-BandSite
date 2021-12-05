@@ -8,6 +8,10 @@ $White: #FFF;
 $Error-Red: #D22D2D;
 
 
+::placeholder{
+    $Bandsite-Black: #323232;
+}
+
 //Breakpoints
 // Tablet+ sized screens
 @mixin tablet {
@@ -22,6 +26,7 @@ $Error-Red: #D22D2D;
     @media (min-width: 1058px) {
         padding-left: calc((100% - 1058px) / 2 + #{$tabletPadding}rem);
         padding-right: calc((100% - 1058px) / 2 + #{$tabletPadding}rem);
+        @content;
     }
 }
 
@@ -91,11 +96,13 @@ h3 {
     }
 }
 
+//Some section heading size font doesn't grow in the mockup
 h4 {
     font-size: .875rem;
     line-height: 1rem; 
     font-weight: 600;
 }
+
 
 //links
 a {
@@ -114,7 +121,20 @@ p {
   }
 }
 
+button {
+    width: 100%;
+    min-width: 150px;
+    height: 2.5rem;
+    color: $White;
+    background-color: $Bandsite-Black;
+    border-radius: 0.25rem;
+    border: none;
+    text-transform: uppercase;
 
+    &:hover, :active {
+        background-color: $BandSite-DarkBlack;
+        }
+}
 
 header {
     background-color: $Bandsite-Black;

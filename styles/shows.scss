@@ -1,0 +1,66 @@
+@import "./partials/_global.scss"; //styleguide fonts, breakpoints, header, and footer
+
+.hero {
+    background: linear-gradient(rgba($Bandsite-Black,0.5), rgba($Bandsite-Black,0.5)), url("../assets/images/hero-shows.jpg");
+    height: 58vw;
+    max-height: 40rem;
+    background-size: cover;
+    background-position-y: 20%;
+    position: relative;
+}
+
+.shows {
+    padding-bottom: 1rem;
+    max-width: 30 rem;
+    margin-left: auto;
+    margin-right: auto;
+
+    div {
+        padding: 1rem;
+        border-bottom: 1px solid $Mercury;
+
+        @include tablet {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+
+            &:hover {
+                background-color: seagreen;
+            }
+        }
+
+        h4 {
+            color: $Silver;
+
+            @include tablet {
+                display: none;
+            }
+        }
+
+        p {
+            flex-basis: 1;
+        }
+
+        button {
+            @include tablet {
+                max-width: 10rem;
+            }
+        }
+    }
+
+    &__tablet-title-card {
+        display: none;
+
+        @include tablet {
+            display: block;
+        }
+
+        
+    }
+}
+
+.tablet-title{
+    @include tablet {
+        display: block;
+    }
+}

@@ -145,13 +145,23 @@
     padding-right: 1rem;
 
     @include tablet {
-        padding-left: 6rem;
-        padding-right: 6rem;
+        @include tablet {
+            padding-left: 6rem;
+            padding-right: 6rem;
+    
+            h2 {
+                transform: translateX(-3rem);
+            }
+        }
+    
+        @include desktop(6);
 
-        h2 {
+        /*h2 {
             position: relative;
             left: -3rem;
-        }
+
+
+        }*/
     }
 
     //@include desktop {
@@ -166,8 +176,12 @@
         padding-bottom: 1rem;
         border-bottom: 1px $Mercury solid;
 
-       
-
+        @include desktop {
+            max-width: 30rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    
         img{
             transform: translateY(1.25rem);
         }
@@ -197,13 +211,15 @@
                 border-radius: .25rem;
                 font-size: 0.875rem;
                 line-height: 1rem;
-                color: $Bandsite-Black;
+                color: $BandSite-DarkBlack;
                 background-color: $Alabaster;
 
                 &:active, &:focus{
-                    border: 1px solid $Error-Red;
+                    border: 1px solid $Bandsite-Black;
                     //background-color: yellow;
+                    outline: none;
                 }
+
             }
 
             textarea {
@@ -211,17 +227,7 @@
                 resize: none;
             }
 
-            button {
-                width: 100%;
-                min-width: 150px;
-                height: 2.5rem;
-                color: $White;
-                background-color: $Bandsite-Black;
-                border-radius: 0.25rem;
-                border: none;
-                text-transform: uppercase;
-                
-                
+            button {  
 
                 @include tablet {
                     max-width: 8rem;
@@ -246,7 +252,12 @@
 #conversation__comments{
     flex-direction: column;
     margin-bottom: 1rem;
-
+    
+    @include desktop {
+        max-width: 30rem;
+        margin-left: auto;
+        margin-right: auto;
+    }
 
 
     .card {
@@ -270,7 +281,8 @@
         }
 
         p{
-            padding-top: 1rem;
+            padding-top: 0.5rem;
+            font-weight: 600;
         }
 
     }
@@ -284,4 +296,10 @@
     border-radius: 50%;
     object-position: 10% 0;
     background-color: $Mercury;
+
+    //bigger avatars on tablet+
+    @include tablet {
+        height: 3rem;
+        min-width: 3rem;
+    }
 }
