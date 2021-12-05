@@ -415,9 +415,6 @@ footer {
   .shows__tour-stop:hover {
     background-color: #FAFAFA;
   }
-  .shows__tour-stop:active {
-    background-color: #E1E1E1;
-  }
 }
 .shows__tour-stop h4 {
   color: #AFAFAF;

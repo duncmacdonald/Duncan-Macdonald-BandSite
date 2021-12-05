@@ -46,7 +46,7 @@ window.onload = () => {
   for (let i = 0; i < comments.length; i++) {
     displayComment(comments[i]);
   }
-};
+}; //end of window.onload
 
 /*takes in two form elements,
  *adds or removes an error class as required
@@ -66,7 +66,7 @@ function validateForm(aName, aMessage) {
 
   if (message.length < 10) {
     aMessage.classList.add("error");
-    alert("Message is too short");
+    alert("Message is too short.");
     output = false;
   } else {
     aMessage.classList.remove("error");
@@ -77,55 +77,62 @@ function validateForm(aName, aMessage) {
 
 //Add a single comment to the screen
 function displayComment(com) {
-  
-     //mockup has 2 digit date and month
-     let month = String(com.timestamp.getMonth()+1);
-    if(month.length<2){
-      month = 0 + month;
-    }
-   let date = String(com.timestamp.getDate());
-    if(date.length<2){
-      date = 0 + date;
-    }
-    const year = String(com.timestamp.getFullYear());
-  
+  //mockup has 2 digit date and month
+  let month = String(com.timestamp.getMonth() + 1);
+  if (month.length < 2) {
+    month = 0 + month;
+  }
+  let date = String(com.timestamp.getDate());
+  if (date.length < 2) {
+    date = 0 + date;
+  }
+  const year = String(com.timestamp.getFullYear());
 
   const now = new Date();
-  const delta= now.valueOf() - com.timestamp.valueOf();
+  const delta = now.valueOf() - com.timestamp.valueOf();
   let timeMessage = "";
 
-  if (delta < 60000){
+  //Add as many user friendly message states as desired
+  //60000 milliseconds is a minute, 86400000 is 24 hours
+  //the order the comments appear is not determined here and displayed message is only accurate enough to make humans happy 
+  if (delta < 60000) {
     timeMessage = "moments ago";
-  } else if ( delta < 86400000 && now.getDate() === com.timestamp.getDate()){
+  } else if (delta < 86400000 && now.getDate() === com.timestamp.getDate()) {
     timeMessage = "today";
-  } else if (delta < (7*86400000)){
-    timeMessage = "in the past 7 days"
+  } else if (delta < (32 * 86400000)) {
+    //it's the same function with a different denominator if you want to do weeks, months, years, etc...
+    timeMessage = Math.floor((now.valueOf()-com.timestamp.valueOf())/86400000) + " days ago";
+  } else if (delta < (365 * 86400000)) {
+    //30 days is an approximate month
+    timeMessage = Math.floor((now.valueOf()-com.timestamp.valueOf())/(30 * 86400000)) + " months ago";
   } else {
+    //leaving the possibility for some comments with the styling from the mockup
     timeMessage = month + "/" + date + "/" + year;
   }
 
   const commentContainer = document.getElementById("conversation__comments");
   const card = document.createElement("div");
-  card.setAttribute("class", "card");
+  card.classList.add("card");
   commentContainer.insertBefore(card, document.querySelector(".card"));
 
   if ("avatar" in com) {
     const user_image = document.createElement("img");
     user_image.setAttribute("alt", "user_avatar");
-    user_image.setAttribute("class", "avatar");
     user_image.setAttribute("src", com.avatar);
+    user_image.classList.add("avatar");
+
     card.appendChild(user_image);
   } else {
     //if no avatar in object make a div that can be styled as a grey circle without a missing file icon
     const user_image = document.createElement("div");
     user_image.setAttribute("alt", "user_avatar");
-    user_image.setAttribute("class", "avatar");
+    user_image.classList.add("avatar");
     card.appendChild(user_image);
   }
 
   //container for right side card content
   const rightOfCard = document.createElement("div");
-  rightOfCard.setAttribute("class", "card__right");
+  rightOfCard.classList.add("card__right");
   card.appendChild(rightOfCard);
 
   //flex container for name and time
@@ -140,7 +147,7 @@ function displayComment(com) {
   //time
   const time = document.createElement("div");
   //time.innerText = month + "/" + date + "/" + year;
-  time.innerText = timeMessage
+  time.innerText = timeMessage;
   topOfCard.appendChild(time);
 
   //message
