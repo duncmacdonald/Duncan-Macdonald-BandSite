@@ -88,6 +88,9 @@ button {
   border-radius: 0.25rem;
   border: none;
   text-transform: uppercase;
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1rem;
 }
 button:hover, button :active {
   background-color: #000;
@@ -425,16 +428,6 @@ footer {
   padding-left: 1rem;
   padding-right: 1rem;
 }
-@media (min-width: 768px) {
-  .conversation {
-    /*h2 {
-        position: relative;
-        left: -3rem;
-
-
-    }*/
-  }
-}
 @media (min-width: 768px) and (min-width: 768px) {
   .conversation {
     padding-left: 6rem;
@@ -501,13 +494,12 @@ footer {
   border: 1px solid #323232;
   outline: none;
 }
+.conversation__top form .error {
+  border: 1px solid #D22D2D;
+}
 .conversation__top form textarea {
   height: 6rem;
   resize: none;
-}
-.conversation__top form button {
-  font-weight: 600;
-  font-size: 1rem;
 }
 @media (min-width: 768px) {
   .conversation__top form button {

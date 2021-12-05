@@ -2,11 +2,85 @@
 
 .hero {
     background: linear-gradient(rgba($Bandsite-Black,0.5), rgba($Bandsite-Black,0.5)), url("../assets/images/hero-shows.jpg");
-    height: 58vw;
-    max-height: 40rem;
+    height: 18rem;
     background-size: cover;
-    background-position-y: 20%;
+    background-position-y: 25%;
     position: relative;
+    color: white;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 2.5rem;
+    min-width: 14rem;
+
+
+    @include tablet {
+        padding-left: 3rem;
+        padding-right: 3rem;
+        height: 25rem;
+        //background-position-y: 50%;
+    }
+
+    @include desktop(3) {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+    }
+
+    &__word-block {
+        max-width: 15rem;
+
+        @include tablet {
+            max-width: 35rem;
+        }
+
+        @include desktop(0) {
+            max-width: 30rem;
+            max-height: 12rem;
+            
+        }
+
+        h2 {
+            //override h2 color and weight
+            font-weight: 600;
+            color: $White;
+            padding-top: 1rem;
+            font-size: 1.75rem;
+            line-height: 2.25rem;
+            
+            @include tablet {
+                font-size: 3.75rem;
+                line-height: 4.25rem;
+            }
+        }
+    
+        h3 {
+            color: $White;
+            font-weight: 400;
+            font-size: 1rem;
+
+            @include tablet {
+                font-size: 1.5rem;
+                font-weight: 600;
+            }
+        }
+    }
+
+    &__soundcloud {
+        width: 100%;
+        max-width: 25rem;
+        height: 8rem;
+
+        @include desktop (0){
+            padding-top: 2rem;
+        }
+    }
+    
+
+
+
+
 }
 
 .shows {
@@ -15,7 +89,30 @@
     margin-left: auto;
     margin-right: auto;
 
+    h2 {
+        padding-left: 1rem;
+
+        @include tablet {
+            padding-left: 3rem;
+        }
+
+        @include desktop(3);
+    }
+
     div {
+        @include desktop(){
+            max-width: 45rem;
+            position: relative;
+            top: -2.5rem;
+            margin-left: auto;
+            padding-right: 1rem;
+            padding-left: 1rem;
+            margin-right: calc((100% - 1058px)/2 + 2rem);
+        }
+        
+    }
+
+    &__tour-stop {
         padding: 1rem;
         border-bottom: 1px solid $Mercury;
 
@@ -23,14 +120,20 @@
             display: flex;
             justify-content: space-between;
             align-items: baseline;
+            margin: 0 2rem;
 
             &:hover {
-                background-color: seagreen;
+                background-color: $Alabaster;
+            }
+
+            &:active {
+                background-color: $Mercury;
             }
         }
 
         h4 {
             color: $Silver;
+            text-transform: uppercase;
 
             @include tablet {
                 display: none;
@@ -38,7 +141,13 @@
         }
 
         p {
-            flex-basis: 1;
+            width: 10rem;
+            font-size: 1rem;
+            padding: .5rem 0 1rem;
+
+            @include tablet{
+                padding: 0;
+            }
         }
 
         button {
@@ -48,11 +157,28 @@
         }
     }
 
+    .active{
+        background-color: $Mercury;
+    }
+
     &__tablet-title-card {
         display: none;
 
+        h4{
+            width: 10rem;
+            color: $Silver;
+            text-transform: uppercase;
+        }
+
         @include tablet {
-            display: block;
+            display: flex;
+            justify-content: space-between;
+            margin-left: 3rem;
+            margin-right: 3rem;
+
+            &:hover, &:active {
+                background-color: $White;
+            }
         }
 
         
@@ -62,5 +188,14 @@
 .tablet-title{
     @include tablet {
         display: block;
+        
     }
+
+    @include desktop(0){
+        padding-bottom: 1rem;
+    }
+}
+
+.bold {
+    font-weight: 600;
 }

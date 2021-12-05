@@ -46,7 +46,7 @@ window.onload = () => {
 
 
   //Add a tour cards under h2
-  //Tablet+ title block
+  //Tablet+ size title block
   const title_card = document.createElement("div");
   title_card.classList.add("shows__tablet-title-card")
   section.appendChild(title_card);
@@ -61,6 +61,7 @@ window.onload = () => {
   const venue_tablet_title = document.createElement("h4");
   venue_tablet_title.classList.add("tablet-title");
   venue_tablet_title.innerText = "Venue";
+  title_card.appendChild(venue_tablet_title);
 
 
   //Location
@@ -71,14 +72,16 @@ window.onload = () => {
 
 
   //Button
-  const button_tablet_title = document.createElement('div');
+  const button_tablet_title = document.createElement('h4');
   button_tablet_title.classList.add("tablet-title");
   title_card.appendChild(button_tablet_title);
 
-
+  //For loop to add all tour details to a table
   for (let i = 0; i < show.length; i++) {
     
+    //Add a row
     const card = document.createElement("div");
+    card.classList.add('shows__tour-stop');
     section.appendChild(card);
 
     //Date
@@ -87,6 +90,7 @@ window.onload = () => {
     card.appendChild(date_title);
     const show_date = document.createElement("p");
     show_date.innerText = show[i].date;
+    show_date.classList.add('bold');
     card.appendChild(show_date);
 
     //Venue
@@ -110,4 +114,22 @@ window.onload = () => {
     tickets_button.innerText = "Buy Tickets";
     card.appendChild(tickets_button);
   }
+
+  //find all tour stops so we can attach listeners
+  const tourStop  = document.querySelectorAll(".shows__tour-stop");
+  console.log(tourStop);
+
+  //for each tour stop toggle assigning an "active" class when clicked 
+  tourStop.forEach((stop) => {
+    stop.addEventListener("click", (e) => {
+      if(stop.classList.contains("active")){
+        stop.classList.remove("active");
+      } 
+      else {
+        stop.classList.add("active");
+      }
+      
+
+    });
+  });
 };

@@ -8,10 +8,6 @@ $White: #FFF;
 $Error-Red: #D22D2D;
 
 
-::placeholder{
-    $Bandsite-Black: #323232;
-}
-
 //Breakpoints
 // Tablet+ sized screens
 @mixin tablet {
@@ -130,6 +126,9 @@ button {
     border-radius: 0.25rem;
     border: none;
     text-transform: uppercase;
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1rem;
 
     &:hover, :active {
         background-color: $BandSite-DarkBlack;

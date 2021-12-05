@@ -155,20 +155,7 @@
         }
     
         @include desktop(6);
-
-        /*h2 {
-            position: relative;
-            left: -3rem;
-
-
-        }*/
     }
-
-    //@include desktop {
-    //    max-width: 30rem;
-    //    margin-left: auto;
-    //    margin-right: auto;
-    //}
 
     &__top {
         display: flex;
@@ -222,6 +209,10 @@
 
             }
 
+            .error {
+                border: 1px solid $Error-Red;
+            }
+
             textarea {
                 height: 6rem;
                 resize: none;
@@ -235,10 +226,6 @@
                     right: 0;
                     bottom: 0;
                 }
-                
-                //Match font from mockup
-                font-weight: 600;
-                font-size: 1rem;
 
                 &:hover {
                     background-color: $BandSite-DarkBlack;
