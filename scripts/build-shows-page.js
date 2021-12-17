@@ -1,135 +1,97 @@
 window.onload = () => {
-  //array of tour date objects
-  const show = [
-    {
-      date: "Mon Sept 06 2021",
-      venue: "Ronald Lane",
-      location: "San Francisco, CA",
-    },
-    {
-      date: "Tue Sept 21 2021",
-      venue: "Pier 3 East",
-      location: "San Francisco, CA",
-    },
-    {
-      date: "Fri Oct 15 2021",
-      venue: "View Lounge",
-      location: "San Francisco, CA",
-    },
-    {
-      date: "Sat Nov 06 2021",
-      venue: "Hyatt Agency",
-      location: "San Francisco, CA",
-    },
-    {
-      date: "Fri Nov 26 2021",
-      venue: "Moscow Center",
-      location: "San Francisco, CA",
-    },
-    {
-      date: "Wed Dec 15 2021",
-      venue: "Press Club",
-      location: "San Francisco, CA",
-    },
-  ];
 
-  //make a "shows" section
-  const page = document.querySelector("body");
-  const section = document.createElement("section");
-  section.classList.add("shows");
-  page.insertBefore(section, document.querySelector("footer"));
+  const baseURL = 'https://project-1-api.herokuapp.com';
+  const apiKey = '947d7ded-9e44-4c14-a46b-126267c78fe1';
 
-  //Add an h2 to shows
-  const section_title = document.createElement("h2");
-  section_title.innerText = "Shows";
-  section.appendChild(section_title);
+  
+  getAllShowdates();
 
-
-  //Add a tour cards under h2
-  //Tablet+ size title block
-  const title_card = document.createElement("div");
-  title_card.classList.add("shows__tablet-title-card")
-  section.appendChild(title_card);
-
-  const date_tablet_title = document.createElement("h4");
-  date_tablet_title.innerText = "Date";
-  date_tablet_title.classList.add("tablet-title");
-  title_card.appendChild(date_tablet_title);
-
-
-  //Venue
-  const venue_tablet_title = document.createElement("h4");
-  venue_tablet_title.classList.add("tablet-title");
-  venue_tablet_title.innerText = "Venue";
-  title_card.appendChild(venue_tablet_title);
-
-
-  //Location
-  const location_tablet_title = document.createElement("h4");
-  location_tablet_title.innerText = "Location";
-  location_tablet_title.classList.add("tablet-title");
-  title_card.appendChild(location_tablet_title);
-
-
-  //Button
-  const button_tablet_title = document.createElement('h4');
-  button_tablet_title.classList.add("tablet-title");
-  title_card.appendChild(button_tablet_title);
-
-  //For loop to add all tour details to a table
-  for (let i = 0; i < show.length; i++) {
-    
-    //Add a row
-    const card = document.createElement("div");
-    card.classList.add('shows__tour-stop');
-    section.appendChild(card);
-
-    //Date
-    const date_title = document.createElement("h4");
-    date_title.innerText = "Date";
-    card.appendChild(date_title);
-    const show_date = document.createElement("p");
-    show_date.innerText = show[i].date;
-    show_date.classList.add('bold');
-    card.appendChild(show_date);
-
-    //Venue
-    const venue_title = document.createElement("h4");
-    venue_title.innerText = "Venue";
-    card.appendChild(venue_title);
-    const show_venue = document.createElement("p");
-    show_venue.innerText = show[i].venue;
-    card.appendChild(show_venue);
-
-    //Location
-    const location_title = document.createElement("h4");
-    location_title.innerText = "Location";
-    card.appendChild(location_title);
-    const show_location = document.createElement("p");
-    show_location.innerText = show[i].location;
-    card.appendChild(show_location);
-
-    //Button
-    const tickets_button = document.createElement('button');
-    tickets_button.innerText = "Buy Tickets";
-    card.appendChild(tickets_button);
+  //get an array of showdates
+  function getAllShowdates (){
+    axios.get(`${baseURL}/showdates?api_key=${apiKey}`)
+    .then (result => drawShows(result.data))
+    .catch(error => console.log(error));
   }
 
-  //find all tour stops so we can attach listeners
-  const tourStop  = document.querySelectorAll(".shows__tour-stop");
-  console.log(tourStop);
+  function drawShows(show){
+    //turn all timestamps into proper Date objects
+    show.forEach(element => element.date = new Date(Number(element.date)));
 
-  //for each tour stop toggle assigning an "active" class when clicked 
-  tourStop.forEach((stop) => {
-    stop.addEventListener("click", (e) => {
-      if(stop.classList.contains("active")){
-        stop.classList.remove("active");
-      } 
-      else {
-        stop.classList.add("active");
-      }
+    //make a "shows" section
+    const page = document.querySelector("body");
+    const section = document.createElement("section");
+    section.classList.add("shows");
+    page.insertBefore(section, document.querySelector("footer"));
+
+    //Add an h2 to shows
+    dryDomChild(section,"h2","Shows");
+
+    //Add a tour cards under h2
+    //Tablet+ size title block
+    const title_card = dryDomChild(section,"div","","shows__tablet-title-card");
+
+    //Date
+    dryDomChild(title_card,"h4","Date","tablet-title")
+
+    //Venue
+    dryDomChild(title_card, "h4", "Venue", "tablet-title");
+
+    //Location
+    dryDomChild(title_card, "h4", "Location", "tablet-title");
+
+    //Button 
+    dryDomChild(title_card, "h4", ""); //Intentionally empty becuse the buttons dont have a column title
+
+    //For loop to add all tour details to a table
+    show.forEach(event => {
       
+      //Add a row
+      const card = dryDomChild(section,"div","","shows__tour-stop");
 
+      //Date
+      dryDomChild(card, "h4", "Date");
+      dryDomChild(card, "p", event.date.toDateString(), "bold");
+
+      //Venue
+      dryDomChild(card, "h4", "Venue");
+      dryDomChild(card, "p", event.place)
+
+      //Location
+      dryDomChild(card,"h4","Location");
+      dryDomChild(card, "p", event.location);
+
+      //Button
+      dryDomChild(card, "button", "Buy Tickets");
     });
-  });
+
+    //find all tour stops so we can attach listeners
+    const tourStop  = document.querySelectorAll(".shows__tour-stop");
+
+    //for each tour stop toggle assigning an "active" class when clicked 
+    tourStop.forEach((stop) => {
+      stop.addEventListener("click", (e) => {
+        if(stop.classList.contains("active")){
+          //make this one not active
+          stop.classList.remove("active");
+        } 
+        else {
+          //remove any possible active state
+          tourStop.forEach(stop => stop.classList.remove("active"));
+          //make this one active
+          stop.classList.add("active");
+        }
+        
+
+      });
+    });
+   }
+
+   //"Don't Repeat Yourself" DOM append child function. Returns the child incase you need to add grandchildren.
+   function dryDomChild (parentNode, newElementType, childInnerText, childClass){
+    const newChild = document.createElement(newElementType);
+    if(childInnerText != undefined) newChild.innerText = childInnerText;
+    if(childClass != undefined) newChild.classList.add(childClass);
+    parentNode.appendChild(newChild);
+    return newChild;
+   }
 };

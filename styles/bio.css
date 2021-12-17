@@ -544,7 +544,6 @@ footer {
 }
 #conversation__comments .card p {
   padding-top: 0.5rem;
-  font-weight: 600;
 }
 
 .avatar {
@@ -563,4 +562,16 @@ footer {
     height: 3rem;
     min-width: 3rem;
   }
+}
+
+.like-count {
+  margin: 0 auto 0 0.5rem;
+  padding-bottom: 0.25rem;
+}
+
+.little-button {
+  filter: invert(1);
+}
+.little-button:hover {
+  filter: invert(0);
 }/*# sourceMappingURL=bio.css.map */
