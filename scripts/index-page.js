@@ -5,22 +5,6 @@ window.onload = () => {
   //Async draw the comments once retrieved from the server
   getAllComments();
 
-  //Listen for a submit to create a new comment object
-  const form = document.getElementById("newComment");
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const aTimestamp = new Date();
-
-    if (validateForm(e.target.user_name, e.target.message)) {
-      //add the comment to the array of comments
-      submitComment(e.target.user_name.value, e.target.message.value);
-
-      //display the new comment
-      //displayComment(comments[comments.length - 1]);
-      form.reset();
-    }
-  }); //end of Submit listener
-
   //get an array of comment objects from the server
   function getAllComments() {
     axios
@@ -28,7 +12,7 @@ window.onload = () => {
       .then((result) => {
         const serverComments = result.data;
 
-        //For some reason the default comments are stored in reverse timestamp order and the POST method adds new comments to the end of the array
+        //For some reason the default comments are stored in reverse timestamp order and the POST method adds the newest comments to the end of the array
         //This locally corrects that mistake. All server comments are sorted into a logical order so new comments can be added to the end of the array.
         serverComments.sort((a, b) => {
           return a.timestamp - b.timestamp;
@@ -42,34 +26,20 @@ window.onload = () => {
       .catch((error) => console.log(error));
   }
 
-  function resyncComments() {
-    const commentsToDelete = document.querySelectorAll(".card");
-    commentsToDelete.forEach((element) =>
-      element.parentNode.removeChild(element)
-    );
-    //comments = [];
-    getAllComments();
-  }
-
-  //Submit a comment
+  //Submit a comment to server
   function submitComment(name, comment) {
-    const commentObj = {
-      name: name,
-      comment: comment,
-    };
+    const commentObj = {name: name, comment: comment,};
     const header = { "Content-Type": "application/json" };
 
     axios
       .post(`${baseURL}/comments?api_key=${apiKey}`, commentObj, header)
       .then((result) => {
         let tempObject = result.data;
-        //add an avatar tomatch sprint-2 design
+        //add an avatar to match sprint-2 design
         tempObject.avatar = "./assets/images/Mohan-muruge.jpg";
 
-        //comments.push(tempObject);
         //display the new comment
-        //displayComment(tempObject)
-        resyncComments();
+        displayComment(tempObject)       
       });
   }
 
@@ -78,7 +48,8 @@ window.onload = () => {
     axios
       .put(`${baseURL}/comments/${id}/like?api_key=${apiKey}`)
       .then((result) => {
-        resyncComments();
+        const commentLikes = document.querySelector(`#c${id} .like-count`);
+        commentLikes.innerText = result.data.likes; //update the like counter within the specified comment id
       })
       .catch((error) => console.log(error));
   }
@@ -88,7 +59,8 @@ window.onload = () => {
     axios
       .delete(`${baseURL}/comments/${id}?api_key=${apiKey}`)
       .then((result) => {
-        resyncComments();
+        const cardToDelete = document.querySelector(`#c${id}`);
+        cardToDelete.remove();
       })
       .catch((error) => console.log(error));
   }
@@ -163,14 +135,16 @@ window.onload = () => {
     const commentContainer = document.getElementById("conversation__comments");
     const card = document.createElement("div");
     card.classList.add("card");
+    card.id = "c" + com.id; //used by like/delete by id methods, css selectors require a leading letter
     commentContainer.insertBefore(card, document.querySelector(".card"));
 
+    
     if ("avatar" in com) {
+      //if comment object has an avatar image, display it
       const user_image = dryDomChild(card, "img", "", "avatar");
       user_image.setAttribute("alt", "user_avatar");
       user_image.setAttribute("src", com.avatar);
 
-      card.appendChild(user_image);
     } else {
       //if no avatar in object make a div that can be styled as a grey circle without a missing file icon
       const user_image = dryDomChild(card, "div", "", "avatar");
@@ -192,23 +166,33 @@ window.onload = () => {
     //message
     dryDomChild(rightOfCard, "p", com.comment);
 
+    //container for like & delete buttons
     let bottomOfCard = dryDomChild(rightOfCard,"div");
 
+    //like button
     let like = dryDomChild(bottomOfCard,"img","","little-button"
     );
     like.setAttribute("src", "./assets/icons/icon-like.svg");
     like.setAttribute("alt", "like");
 
+    //number of likes
     dryDomChild(bottomOfCard, "p", com.likes, "like-count");
 
+    //delete button
     let del = dryDomChild(bottomOfCard, "img", "", "little-button");
     del.setAttribute("src", "./assets/icons/icon-delete.svg");
     del.setAttribute("alt", "delete");
 
-    like.addEventListener("click", () => {
+    //Limit user to 1 like per comment per page visit by removing listener after being clicked
+    const likeFunction = () => {
       likeCommentByID(com.id);
-    });
+      like.removeEventListener("click", likeFunction);
+    }
 
+    //Like buton listener
+    like.addEventListener("click", likeFunction);
+
+    //Delete button listener
     del.addEventListener("click", () => {
       deleteCommentByID(com.id);
     });
@@ -223,11 +207,18 @@ window.onload = () => {
     return newChild;
   }
 
-  // Get a new API key (shouldn't be needed)
-  // let key
-  // axios.get('https://project-1-api.herokuapp.com/register')
-  // .then(result => {
-  //     key = result.data.api_key;
-  //     console.log(key);
-  // });
+   //Listen for a submit to create a new comment object
+   const form = document.getElementById("newComment");
+   form.addEventListener("submit", (e) => {
+     e.preventDefault();
+     const aTimestamp = new Date();
+ 
+     if (validateForm(e.target.user_name, e.target.message)) {
+       //If a comment has been validated submit it to the server and then draw it 
+       submitComment(e.target.user_name.value, e.target.message.value);
+
+       form.reset();
+     }
+   }); //end of Submit listener
+   
 }; //end of window.onload
